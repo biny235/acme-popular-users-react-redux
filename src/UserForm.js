@@ -1,7 +1,7 @@
 import React from 'react';
 
-const UserForm = (props)=>{
-  console.log(props)
+const UserForm = ({id})=>{
+  console.log(id)
   return(
     <h1> Hello </h1>
   )

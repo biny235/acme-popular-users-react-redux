@@ -11,7 +11,7 @@ const Main = () => {
     <div>
       <Nav />
       <Route exact path='/' render={ () => <Users /> }/>
-      <Route path='/users/:id' render={ (match) => <UserForm id={match}/> } />
+      <Route path='/users/:id' render={ ({match}) => <UserForm id={match.params.id * 1}/> } />
     </div>
   )
 };
