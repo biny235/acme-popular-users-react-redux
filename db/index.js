@@ -6,7 +6,7 @@ const syncAndSeed = () => {
   return conn.sync({ force: true })
     .then(()=>{
       return Promise.all([
-        User.create({name: faker.name.firstName()}),
+        User.create({name: faker.name.firstName(), rating: 5}),
         User.create({name: faker.name.firstName()}),
         User.create({name: faker.name.firstName()}),
         User.create({name: faker.name.firstName()}),

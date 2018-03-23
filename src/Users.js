@@ -11,8 +11,8 @@ const Users = ({ users })=>{
             <li key={user.id}>
               <Link to={`users/${user.id}`}>
                 { user.name }
+                <span> ({ user.rating }) </span>
               </Link>
-              <span> ({ user.rating }) </span>
             </li>
         )})
       }
@@ -21,9 +21,9 @@ const Users = ({ users })=>{
 };
 
 
-const mapStateToProps = ({users})=>{
+const mapStateToProps = (state)=>{
   return{
-    users: users || []
+    users: state.users
   }
 }
 

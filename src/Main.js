@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 import Nav from './Nav';
@@ -10,8 +10,11 @@ const Main = () => {
   return(
     <div>
       <Nav />
-      <Route exact path='/' render={ () => <Users /> }/>
-      <Route path='/users/:id' render={ ({match}) => <UserForm id={match.params.id * 1}/> } />
+      <Switch>
+        <Route exact path='/' render={ () => <Users /> }/>
+        <Route path='/users/:id' render={ ({match, history}) => <UserForm history={history} id={match.params.id * 1}/> } />
+        <Route path='/createuser' render={ ({history}) => <UserForm history={history}/> } />
+      </Switch>
     </div>
   )
 };
