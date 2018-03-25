@@ -7,10 +7,10 @@ const syncAndSeed = () => {
     .then(()=>{
       return Promise.all([
         User.create({name: faker.name.firstName(), rating: 5}),
-        User.create({name: faker.name.firstName()}),
-        User.create({name: faker.name.firstName()}),
-        User.create({name: faker.name.firstName()}),
-        User.create({name: faker.name.firstName()}),
+        User.create({name: faker.name.firstName(), rating: 4}),
+        User.create({name: faker.name.firstName(), rating: 3}),
+        User.create({name: faker.name.firstName(), rating: 2}),
+        User.create({name: faker.name.firstName(), rating: 1}),
       ])
     })
 };
