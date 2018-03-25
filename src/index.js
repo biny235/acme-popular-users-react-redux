@@ -8,6 +8,8 @@ import Main from './Main';
 
 const app = document.getElementById('app');
 
+fetchUsers()
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
@@ -15,4 +17,3 @@ ReactDOM.render(
     </Router>
   </Provider>
   , app)
-fetchUsers()

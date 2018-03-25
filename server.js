@@ -20,7 +20,6 @@ app.get('/api/users', (req, res, next)=>{
 })
 
 app.post('/api/users', (req, res, next)=>{
-
   User.create(req.body)
     .then(user => res.send(user))
     .catch(next)
@@ -33,6 +32,17 @@ app.delete('/api/users/:id', (req, res, next)=>{
     .catch(next)
 
 })
+app.put('/api/users/:id', (req, res, next)=>{
+  User.findById(req.params.id)
+    .then(user => {
+      user = Object.assign(user, req.body)
+      return user.save()
+    })
+    .then((user)=> res.send(user))
+    .catch(next)
+
+})
+
 
 const port = process.env.PORT || 3000;
 

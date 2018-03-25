@@ -34,7 +34,7 @@ class UserForm extends React.Component{
     this.props.handleSubmit(this.state)
   }
   onDelete(ev){
-    this.props.handleDelete(this.state.id, this.props.history)
+    this.props.handleDelete(this.state.id)
   }
   
   render(){
@@ -43,20 +43,20 @@ class UserForm extends React.Component{
     const { handleChange, onSubmit, onDelete} = this
     return(
       <div>
-        <h3> {user.name} </h3>
-        <input value={name} onChange={handleChange} name="name"/>
-        <input value={rating} onChange={handleChange} name="rating" type="number" />
-        <button onClick={onSubmit}> {user.id ? 'Update ' : 'Create ' } User</button>
-        {user.id ? <button onClick={onDelete}>DELETE</button> : null}
+        <h3> { user.name } </h3>
+        <input value={ name } onChange={ handleChange } name="name"/>
+        <input value={ rating } onChange={ handleChange } name="rating" type="number" />
+        <button onClick={ onSubmit }> {user.id ? 'Update ' : 'Create ' } User</button>
+        { user.id ? <button onClick={onDelete}>DELETE</button> : null }
       </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch, { history }) =>{
   return{
-    handleSubmit: (user)=>dispatch(postUser(user)),
-    handleDelete: (id, history)=>dispatch(deleteUser(id, history))
+    handleSubmit: (user)=> dispatch(postUser(user, history)),
+    handleDelete: (id)=> dispatch(deleteUser(id, history))
   }
 }
 

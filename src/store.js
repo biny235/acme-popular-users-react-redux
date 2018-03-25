@@ -18,22 +18,22 @@ const fetchUsers = () => {
       })
 }
 
-const postUser = (user) =>{
+const postUser = (user, history) =>{
   const { id } = user
   const postOrPut = id ? 'put' : 'post'
   const type = id ? UPDATE_USER : CREATE_USER 
-  return (dipatch)=>{
+  return (dispatch)=>{
     axios[postOrPut](`api/users/${id ? id : ''}`, user)
       .then(res => res.data)
-      .then(user => dipatch({type, user}))
+      .then(user => dispatch({type, user}))
+      .then(()=> history ? history.push('/') : null)
   }
 }
 
 const deleteUser = (id, history)=>{
-  console.log(history)
   return (dispatch)=>{
     return axios.delete(`api/users/${id}`)
-      .then(dispatch({type: DELETE_USER, id}))
+      .then(()=> dispatch({type: DELETE_USER, id}))
       .then(()=> history.push('/'))
 
   }
@@ -49,6 +49,9 @@ const userReducer = (state = [], action)=>{
       break;
     case CREATE_USER:
       return [...state, action.user]
+      break;
+    case UPDATE_USER:
+      return state.map(user => user.id === action.user.id ? action.user : user)
       break;
     case DELETE_USER:
       return state.filter(user => user.id !== action.id)
