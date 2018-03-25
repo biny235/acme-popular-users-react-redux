@@ -40,9 +40,12 @@ app.put('/api/users/:id', (req, res, next)=>{
     })
     .then((user)=> res.send(user))
     .catch(next)
-
 })
 
+app.use((err, req, res, next)=>{
+  const error = err.errors[0]
+  res.status(500).send({type: error.type, message: error.message})
+})
 
 const port = process.env.PORT || 3000;
 

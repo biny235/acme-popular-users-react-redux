@@ -8,6 +8,8 @@ const GET_USERS = 'GET_USERS';
 const CREATE_USER = 'CREATE_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const DELETE_USER = 'DELETE_USER';
+const HANDLE_ERROR = 'HANDLE_ERROR';
+const CLEAR_ERROR = 'CLEAR_ERROR';
 
 //functions
 const fetchUsers = () => {
@@ -16,6 +18,7 @@ const fetchUsers = () => {
       .then(users => {
         store.dispatch({type: GET_USERS, users})
       })
+      .catch(err => console.log(err.response.data))
 }
 
 const postUser = (user, history) =>{
@@ -27,6 +30,7 @@ const postUser = (user, history) =>{
       .then(res => res.data)
       .then(user => dispatch({type, user}))
       .then(()=> history ? history.push('/') : null)
+      .catch(err => dispatch(handleError(err.response.data)))
   }
 }
 
@@ -39,6 +43,18 @@ const deleteUser = (id, history)=>{
   }
 }
 
+const handleError = (err)=>{
+  return {
+    type: HANDLE_ERROR,
+    err
+  }
+}
+
+const clearError = ()=>{
+  return (dispatch) =>{
+    dispatch({type: CLEAR_ERROR})
+  }
+}
 
 //reducers
 const userReducer = (state = [], action)=>{
@@ -62,11 +78,25 @@ const userReducer = (state = [], action)=>{
 
 }
 
+const errorReducer = (state = {}, action)=>{
+  switch(action.type){
+    case HANDLE_ERROR: 
+      return action.err
+      break;
+    case CLEAR_ERROR:
+      return {}
+      break;
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
-  users: userReducer
+  users: userReducer,
+  error: errorReducer
 })
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;
-export { fetchUsers, postUser, deleteUser }
+export { fetchUsers, postUser, deleteUser, clearError }

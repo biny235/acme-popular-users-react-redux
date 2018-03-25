@@ -5,22 +5,27 @@ import { postUser } from './store';
 
 const Users = ({ users, minusRating, plusRating })=>{
   return(
-    <ul className="list-group">
-      {
-        users.map(user => {
-          return (
-            <li key={user.id} className="list-group-item">
-              <Link to={`users/${user.id}`}>
-                { user.name }
-              </Link>
-              <br />
-              <button onClick={()=> minusRating(user)}>-</button>
-              <span> ({ user.rating }) </span>
-              <button onClick={()=> plusRating(user)} >+</button>
-            </li>
-        )})
-      }
-    </ul>
+    <div class="card" >
+      <div class="card-header">
+        Users
+      </div>
+      <ul className="list-group list-group-flush">
+        {
+          users.map(user => {
+            return (
+              <li key={user.id} className="list-group-item">
+                <Link to={`users/${user.id}`}>
+                  { user.name }
+                </Link>
+                <br />
+                <button onClick={()=> minusRating(user)}>-</button>
+                <span> ({ user.rating }) </span>
+                <button onClick={()=> plusRating(user)} >+</button>
+              </li>
+          )})
+        }
+      </ul>
+    </div>
   )
 };
 
