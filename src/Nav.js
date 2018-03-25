@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 
 const Nav = ({mostPopular})=>{
   return (
-    <ul>
-      <li><NavLink to={'/'}>Home</NavLink></li>
+    <ul className="nav">
+      <li><NavLink to='/'className="nav-link" >Home</NavLink></li>
       { mostPopular ? 
-        <li><NavLink to={`/users/${mostPopular.id}`}>{mostPopular.name} ({mostPopular.rating})</NavLink></li>
+        <li><NavLink to={`/users/${mostPopular.id}`} className="nav-link"  >
+        {mostPopular.name} ({mostPopular.rating})
+        </NavLink></li>
         :
         null
       }
-      <li><NavLink to={'/createuser'}>Create User</NavLink></li>
+      <li><NavLink to='/createuser' className="nav-link">Create User</NavLink></li>
     </ul>
   )
 };

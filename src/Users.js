@@ -5,11 +5,11 @@ import { postUser } from './store';
 
 const Users = ({ users, minusRating, plusRating })=>{
   return(
-    <ul>
+    <ul className="list-group">
       {
         users.map(user => {
           return (
-            <li key={user.id}>
+            <li key={user.id} className="list-group-item">
               <Link to={`users/${user.id}`}>
                 { user.name }
               </Link>

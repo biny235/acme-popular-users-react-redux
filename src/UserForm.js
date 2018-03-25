@@ -8,7 +8,7 @@ class UserForm extends React.Component{
     this.state = {
       name: props.user.name || "",
       rating: props.user.rating || 0,
-      id: props.user.id
+      id: props.user.id || null
     }
     this.handleChange = this.handleChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -18,10 +18,11 @@ class UserForm extends React.Component{
   componentWillReceiveProps(nextProps){
     if(nextProps.user.name !== this.state.name){
       this.setState({
-        name: nextProps.user.name,
-        rating: nextProps.user.rating,
-        id: nextProps.user.id
+        name: nextProps.user.name || "",
+        rating: nextProps.user.rating || 0,
+        id: nextProps.user.id || null
       })
+      
     }
   }
   handleChange(ev){
@@ -60,11 +61,10 @@ const mapDispatchToProps = (dispatch, { history }) =>{
   }
 }
 
-const mapStateToProps = ({ users }, ownProps) => {
+const mapStateToProps = ({ users }, { id }) => {
   return {
-    history: ownProps.history,
-    id: ownProps.id || "",
-    user: users.find(user => user.id === ownProps.id) || ""
+    id: id || null,
+    user: users.find(user => user.id === id) || ""
   }
 
 }

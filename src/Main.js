@@ -8,7 +8,7 @@ import UserForm from './UserForm';
 
 const Main = () => {
   return(
-    <div>
+    <div className="container">
       <Nav />
       <Switch>
         <Route exact path='/' render={ () => <Users /> }/>
