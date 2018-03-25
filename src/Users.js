@@ -5,8 +5,8 @@ import { postUser } from './store';
 
 const Users = ({ users, minusRating, plusRating })=>{
   return(
-    <div class="card" >
-      <div class="card-header">
+    <div className="card" >
+      <div className="card-header">
         Users
       </div>
       <ul className="list-group list-group-flush">
